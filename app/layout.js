@@ -1,7 +1,6 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
+import {roboto, sourceCodePro} from 'styles/font'
 
-const inter = Inter({ subsets: ['latin'] })
+import './globals.css'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +10,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={roboto.className}>
+        <div className='bg-transparent w-100% h-10 fixed top-0 left-0 right-0'>
+          <h1 className='text-center text-8xl text-white'>gamex</h1>
+        </div>
+        {children}
+        <div className='bg-transparent w-100% h-10 fixed bottom-0 left-0 right-0'>
+          <div className='text-center'>
+            // links goes here
+          </div>
+        </div>
+      </body>
     </html>
   )
 }

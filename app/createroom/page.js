@@ -1,28 +1,51 @@
 import { initiateIgnition } from "@/mqtt/ignition"
 import { redirect } from "next/navigation"
-import rooms from "data/createRoomData"
+import { PrismaClient } from "@prisma/client"
+
 
 const Page = () => {
 
 
     async function submit (formData){
         'use server'
+        const prisma = new PrismaClient()
 
-        const data = {
-            name : await formData.get('roomName'),
-            pId1 : await formData.get('pId1'),
-            pId2 : await formData.get('pId2'),
-            mode : await formData.get('mode')
+        async function main(){
+            const newGameData = await prisma.gameData.create({ 
+                data:{
+                    name : await formData.get('roomName'),
+                    pId1 : await formData.get('pId1'),
+                    pId2 : await formData.get('pId2'),
+                    mode : await formData.get('mode')
+                }
+            })
+
+            const allGameData = await prisma.gameData.findMany()
+            console.log("created game data  : ")
+            console.log(newGameData)
+            
+            console.log("fetched gamre data : ")
+            console.log(allGameData)
+
+            // initiateIgnition(data.name, data.pId1, data.mode)
+            // initiateIgnition(data.name, data.pId2, data.mode)
+
+            
         }
-        rooms.push(data)
-        console.log(rooms)
-
-        initiateIgnition(data.name, data.pId1, data.mode)
-        initiateIgnition(data.name, data.pId2, data.mode)
-
-        redirect('/rooms')
         
+        main()
+            .then(async () => {
+                await prisma.$disconnect()
+                
+            })
+            .catch(async e => {
+                console.error(e)
+                await prisma.$disconnect()
+                await process.exit(1)
+        })
+        await redirect('/rooms')
     }
+
 
     return (
         <form className='bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] w-full h-screen flex flex-col justify-center items-center' action={submit}>

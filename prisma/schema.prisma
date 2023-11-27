@@ -6,13 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
-
 model gameData  {
-  id Int @id @default(autoincrement())
+  id Int  @id @default(sequence())
   name String
   pId1 String
   pId2 String

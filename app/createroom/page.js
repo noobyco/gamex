@@ -21,11 +21,6 @@ const Page = () => {
             })
 
             const allGameData = await prisma.gameData.findMany()
-            console.log("created game data  : ")
-            console.log(newGameData)
-            
-            console.log("fetched gamre data : ")
-            console.log(allGameData)
 
             // initiateIgnition(data.name, data.pId1, data.mode)
             // initiateIgnition(data.name, data.pId2, data.mode)

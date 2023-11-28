@@ -10,10 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className= "bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e]">
-        <div className='bg-slate-900 flex justify-center items-center w-[100%] h-fit fixed top-0 left-0 right-0'>
+      <body className={roboto}>
+        <div className='bg-slate-900 z-20 flex justify-center items-center w-[100%] h-[6rem]'>
           <Link href='/'>
-          <h1 className='text-8xl blur-[0px] w-fit z-20 text-white cursor-pointer'>/gamex</h1>
+          <h1 className='text-8xl blur-[0px] w-fit text-white cursor-pointer'>/gamex</h1>
           </Link>
         </div>
         {children}

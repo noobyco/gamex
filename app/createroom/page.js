@@ -20,10 +20,10 @@ const Page = () => {
                 }
             })
 
-            const allGameData = await prisma.gameData.findMany()
+            
 
-            // initiateIgnition(data.name, data.pId1, data.mode)
-            // initiateIgnition(data.name, data.pId2, data.mode)
+            await initiateIgnition(newGameData.name, newGameData.pId1, newGameData.mode)
+            await initiateIgnition(newGameData.name, newGameData.pId2, newGameData.mode)
 
             
         }
@@ -43,10 +43,10 @@ const Page = () => {
 
 
     return (
-        <form className='bg-gradient-to-b from-[#0f0c29] via-[#302b63] to-[#24243e] w-full h-screen flex flex-col justify-center items-center' action={submit}>
+        <form className=' w-full h-full flex flex-col justify-start mt-10 mb-10 items-center' action={submit}>
 
 
-            <h1 className='text-white text-[3rem] pt-[5rem]'>Create Room</h1>
+            <h1 className='text-white text-[3rem]'>Create Room</h1>
             
             <div className='flex flex-col justify-center items-center w-[80%]'>
 
